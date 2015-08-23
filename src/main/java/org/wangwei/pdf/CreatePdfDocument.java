@@ -2,8 +2,6 @@ package org.wangwei.pdf;
 
 import java.io.IOException;
 
-import org.apache.pdfbox.exceptions.COSVisitorException;
-import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.pdmodel.PDPage;
 import org.apache.pdfbox.pdmodel.edit.PDPageContentStream;
 import org.apache.pdfbox.pdmodel.font.PDType1Font;
@@ -22,8 +20,8 @@ public class CreatePdfDocument {
      * @throws IOException
      */
 
-    public static void drawTable(PDPage page, PDPageContentStream contentStream, float y, float margin,
-            String[][] content) throws IOException {
+    public void drawTable(PDPage page, PDPageContentStream contentStream, float y, float margin, String[][] content)
+            throws IOException {
         final int rows = content.length;
 
         final int cols = content[0].length;
@@ -93,39 +91,6 @@ public class CreatePdfDocument {
 
         }
 
-    }
-
-    public static void main(String[] args) throws IOException, COSVisitorException {
-
-        PDDocument doc = new PDDocument();
-
-        PDPage page = new PDPage();
-
-        doc.addPage(page);
-
-        PDPageContentStream contentStream = new PDPageContentStream(doc, page);
-
-        String[][] content = {{"a", "b", "1"},
-
-                {"c", "d", "2"},
-
-                {"e", "f", "3"},
-
-                {"g", "h", "4"},
-
-                {"i", "j", "5"}};
-
-        drawTable(page, contentStream, 700, 2, content);
-
-        contentStream.close();
-
-        doc.save("C:/tttt.pdf");
-
-        AddImageToPDF imagePdf = new AddImageToPDF();
-
-        imagePdf.createPDFFromImage("c:/tttt.pdf", "c:/1.jpg", "c:/tttt.pdf");
-
-        // createPDFFromImage("c:/tttt.pdf", "c:/1.jpg", "c:/tttt.pdf");
     }
 
 }

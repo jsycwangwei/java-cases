@@ -22,10 +22,10 @@ import org.krysalis.barcode4j.output.bitmap.BitmapCanvasProvider;
  *
  * @author wangwei-ww
  */
-public class Barcode4jCreatePDF417 {
+public class Barcode4jCreatePDF128 {
 
     public static void main(String[] args) throws IOException, ConfigurationException, BarcodeException,
-    org.apache.avalon.framework.configuration.ConfigurationException {
+            org.apache.avalon.framework.configuration.ConfigurationException {
         BarcodeUtil util = BarcodeUtil.getInstance();
         BarcodeGenerator gen = util.createBarcodeGenerator(buildCfg("code128"));
         OutputStream fout = new FileOutputStream("d:/code128.jpg");
