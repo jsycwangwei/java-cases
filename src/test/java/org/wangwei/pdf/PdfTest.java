@@ -9,7 +9,7 @@ import org.junit.Test;
 public class PdfTest {
 
     private CreatePdfDocument pdf;
-    private String savePath = "/Users/jsycwangwei/test.pdf";
+    private String savePath = "D:/test.pdf";
 
     @Before
     public void doBefore() {
@@ -29,13 +29,13 @@ public class PdfTest {
 
         String[][] content = {{"a", "b", "1"},
 
-                {"c", "d", "2"},
+        {"c", "d", "2"},
 
-                {"e", "f", "3"},
+        {"e", "f", "3"},
 
-                {"g", "h", "4"},
+        {"g", "h", "4"},
 
-                {"i", "j", "5"}};
+        {"i", "j", "5"}};
 
         pdf.drawTable(page, contentStream, 700, 2, content);
 
