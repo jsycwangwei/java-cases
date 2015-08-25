@@ -3,8 +3,8 @@ package org.wangwei.pdf;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,9 +57,10 @@ public class PDFSample {
         // Total size of columns must not be greater than table width.
         List<Column> columns = new ArrayList<Column>();
         columns.add(new Column("name", 60));
-        columns.add(new Column("value", 180));
+        columns.add(new Column("value", 60));
 
-        Object[][] content = {{"text", "hello"}, {"image", getImage("", 0.2f)}};
+        // Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
+        Object[][] content = {{"text", "hello"}, {"image", "ii"}};
 
         float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
 
@@ -74,8 +75,8 @@ public class PDFSample {
     private BufferedImage getImage(String fn, float sc) {
         BufferedImage image = null;
         try {
-            URL url = new URL(fn);
-            BufferedImage src = ImageIO.read(url);
+            // URL url = new URL(fn);
+            BufferedImage src = ImageIO.read(new File(fn));
             int w = (int) (src.getWidth() * sc);
             int h = (int) (src.getHeight() * sc);
             Image scale = src.getScaledInstance(w, h, Image.SCALE_SMOOTH);

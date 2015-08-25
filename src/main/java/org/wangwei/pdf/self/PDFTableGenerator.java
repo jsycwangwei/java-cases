@@ -20,7 +20,7 @@ public class PDFTableGenerator {
         try {
             doc = new PDDocument();
             drawTable(doc, table);
-            doc.save("d:/sample.pdf");
+            doc.save("/Users/jsycwangwei/sample.pdf");
         }
         finally {
             if (doc != null) {
