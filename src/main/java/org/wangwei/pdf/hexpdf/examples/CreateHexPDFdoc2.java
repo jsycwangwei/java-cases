@@ -23,90 +23,43 @@ import javax.imageio.ImageIO;
 
 import org.wangwei.pdf.hexpdf.Footer;
 import org.wangwei.pdf.hexpdf.HexPDF;
+import org.wangwei.pdf.hexpdf.HexPDF2;
 
 /**
  * Create a simple, two-page, A4 document with text, images and a table. Demonstrates usage of HexPDF
  *
  * @author Frank J. Øynes, heksemann@gmail.com
  */
-public class CreateHexPDFdoc {
+public class CreateHexPDFdoc2 {
 
     private void createDocument() throws Exception {
 
-        // BufferedImage basemap = getImage(imgPath1, 400, 300);
-        // BufferedImage overlay = getImage(imgPath2, 400, 300);
-        String fn = "/Users/jsycwangwei/Downloads/1.jpg";
-        BufferedImage basemap = ImageIO.read(new File(fn));
-        BufferedImage overlay = ImageIO.read(new File(fn));
         Object[][] table = getTable();
 
         // Create a new document and include a default footer
-        HexPDF doc = new HexPDF();
-        doc.setFooter(Footer.defaultFooter);
-        // Change center text in footer
-        doc.getFooter().setCenterText("A simple PDF document\nWritten by me");
-        // Use footer also on first page
-        doc.getFooter().setOMIT_FIRSTPAGE(false);
+        HexPDF2 doc = new HexPDF2();
+
+        createFooter(doc);
 
         // Create the first page
         doc.newPage();
 
-        // Add a main title, centered in shiny colours
-        // doc.title1Style();
-        // doc.setTextColor(new Color(0x2020ff));
-        // doc.drawText("My simple pdf document\n\n", HexPDF.CENTER);
-
-        // Typeset everything else in boring black
-        // doc.setTextColor(Color.black);
-
-        // Add a left aligned sub title followed by left aligned paragraphs
-        // doc.title2Style();
-        // doc.drawText("\n\nLeft aligned text\n\n");
-        // doc.normalStyle();
-        // doc.drawText(getText(3));
-
-        // Add a centered image with another image as overlay, caption below
-        // doc.drawImage(basemap, HexPDF.CENTER);
-        // doc.drawImage(overlay, HexPDF.CENTER | HexPDF.NEWLINE);
-        // doc.drawText("Figure 1: An example figure with overlay\n", HexPDF.CENTER);
-
-        // A new left aligned sub title, now followed by right aligned text
-        // doc.title2Style();
-        // doc.drawText("\n\nRight aligned text\n\n");
-        // doc.normalStyle();
-        // doc.drawText(getText(2), HexPDF.RIGHT);
-
-        // Add a table centered on page, crossing page boundary.
-        // Four columns, aligned left, center, right, left
-        doc.drawTable(table, new float[]{150, 100, 60, 70, 200},
-                new int[]{HexPDF.CENTER, HexPDF.LEFT, HexPDF.CENTER, HexPDF.RIGHT, HexPDF.LEFT}, HexPDF.CENTER);
-                // Add a caption under the table
-                // doc.drawText("Table 1: A rather odd table, centered on page\n", HexPDF.CENTER);
-
-        // New left aligned sub title, followed by centered paragraphs
-        // doc.title2Style();
-        // doc.drawText("\n\nCentered text\n\n");
-        // doc.normalStyle();
-        // doc.drawText(getText(4), HexPDF.CENTER);
-
-        // Add some newlines followed by pages of text, justified
-        // A final left aligned sub title followed by lods of justified text
-        // doc.title2Style();
-        // doc.drawText("\n\nJustified text\n\n");
-        // doc.normalStyle();
-        // for (int i = 0; i < 10; i++) {
-        // doc.drawText(getText(5), HexPDF.JUSTIFY);
-        // }
-
-        // The end...
-        // doc.title1Style();
-        // doc.drawText("\n\n-- END OF DOCUMENT --", HexPDF.CENTER);
+        doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
+        doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
 
         // Save the document
         doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");
     }
 
-    public CreateHexPDFdoc() {
+    private void createFooter(HexPDF2 doc) {
+        doc.setFooter(Footer.defaultFooter);
+        // Change center text in footer
+        doc.getFooter().setCenterText("A simple PDF document\nWritten by me");
+        // Use footer also on first page
+        doc.getFooter().setOMIT_FIRSTPAGE(false);
+    }
+
+    public CreateHexPDFdoc2() {
         //
     }
 
@@ -124,7 +77,7 @@ public class CreateHexPDFdoc {
             g.dispose();
         }
         catch (IOException ex) {
-            Logger.getLogger(CreateHexPDFdoc.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(CreateHexPDFdoc2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return image;
     }
@@ -144,17 +97,14 @@ public class CreateHexPDFdoc {
     private Object[][] getTable() throws Exception {
         String base = "/Users/jsycwangwei/Downloads/1.jpg";
 
-        Object[][] tab = {{null, "Country", "Area", "Population", "Info"},
-                {getImage(base, 150, 40), "Norway", "col2", "col2", "col4"},
-                {getImage(base, 150, 40), "Sweden", "col2", "col2", "col4"},
-                {getImage(base, 150, 40), "Denmark", "col2", "col2", "col4"},
-                {getImage(base, 150, 40), "Vietnam", "col2", "col2", "col4"}};
+        Object[][] tab = {{"pic", "Country"}, {getImage(base, 150, 40), "Norway"}, {getImage(base, 150, 40), "Sweden"},
+                {getImage(base, 150, 40), "Denmark"}, {getImage(base, 150, 40), "Vietnam"}};
 
         return tab;
     }
 
     public static void main(String[] args) throws Exception {
-        CreateHexPDFdoc hex = new CreateHexPDFdoc();
+        CreateHexPDFdoc2 hex = new CreateHexPDFdoc2();
         hex.createDocument();
     }
 }
