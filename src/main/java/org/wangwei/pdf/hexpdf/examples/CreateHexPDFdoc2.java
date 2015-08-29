@@ -28,7 +28,7 @@ import org.wangwei.pdf.hexpdf.HexPDF2;
 /**
  * Create a simple, two-page, A4 document with text, images and a table. Demonstrates usage of HexPDF
  *
- * @author Frank J. Øynes, heksemann@gmail.com
+ * @author jsycwangwei
  */
 public class CreateHexPDFdoc2 {
 
@@ -46,6 +46,8 @@ public class CreateHexPDFdoc2 {
 
         doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
         doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
+
+        doc.newPage();
 
         // Save the document
         doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");

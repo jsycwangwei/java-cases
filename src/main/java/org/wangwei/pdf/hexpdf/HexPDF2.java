@@ -280,6 +280,7 @@ public class HexPDF2 extends PDDocument {
         // firstPage();
     }
 
+    //<editor-fold desc="Description">
     /**
      * Recalculate page boundaries after a change of margins or page style. Automatically called after margin changes.
      *
@@ -311,6 +312,7 @@ public class HexPDF2 extends PDDocument {
         // Set line separation according to current font-size
         lineSep = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * fontSize;
     }
+    //</editor-fold>
 
     /**
      * Returns the width of the pdf representation of the given string in points.

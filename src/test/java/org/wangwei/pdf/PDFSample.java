@@ -29,7 +29,7 @@ public class PDFSample {
     // Page configuration
     private static final PDRectangle PAGE_SIZE = PDPage.PAGE_SIZE_A4;
     private static final float MARGIN = 20;
-    private static final boolean IS_LANDSCAPE = true;
+    private static final boolean IS_LANDSCAPE = false;
 
     // Font configuration
     private static final PDFont TEXT_FONT = PDType1Font.HELVETICA;
@@ -48,7 +48,7 @@ public class PDFSample {
             e.printStackTrace();
         }
         catch (IOException e) {
-            // TODO Auto-generated catch block
+            // TODO Auto-genserated catch block
             e.printStackTrace();
         }
     }
@@ -60,7 +60,7 @@ public class PDFSample {
         columns.add(new Column("value", 60));
 
         // Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
-        Object[][] content = {{"text", "hello"}, {"image", "ii"}};
+        Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
 
         float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
 
