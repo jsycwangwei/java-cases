@@ -28,7 +28,7 @@ public class PDFSample {
 
     // Page configuration
     private static final PDRectangle PAGE_SIZE = PDPage.PAGE_SIZE_A4;
-    private static final float MARGIN = 20;
+    private static final float MARGIN = 200;
     private static final boolean IS_LANDSCAPE = false;
 
     // Font configuration
@@ -36,8 +36,13 @@ public class PDFSample {
     private static final float FONT_SIZE = 10;
 
     // Table configuration
-    private static final float ROW_HEIGHT = 15;
-    private static final float CELL_MARGIN = 2;
+    private static final float ROW_HEIGHT = 100;
+    private static final float CELL_MARGIN = 20;
+
+    @Test
+    public void calA4(){
+        System.out.println(PAGE_SIZE.getWidth());
+    }
 
     @Test
     public void createPDF() {
@@ -56,14 +61,14 @@ public class PDFSample {
     private Table createContent() {
         // Total size of columns must not be greater than table width.
         List<Column> columns = new ArrayList<Column>();
-        columns.add(new Column("name", 60));
-        columns.add(new Column("value", 60));
+        columns.add(new Column("name", 150));
+        columns.add(new Column("ad", 150));
 
         // Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
         Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
 
-        float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
-
+//        float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
+        float tableHeight = 300f;
         Table table = new TableBuilder().setCellMargin(CELL_MARGIN).setColumns(columns).setContent(content)
                 .setHeight(tableHeight).setNumberOfRows(content.length).setRowHeight(ROW_HEIGHT).setMargin(MARGIN)
                 .setPageSize(PAGE_SIZE).setLandscape(IS_LANDSCAPE).setTextFont(TEXT_FONT).setFontSize(FONT_SIZE)

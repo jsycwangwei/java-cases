@@ -1,4 +1,6 @@
-package org.wangwei.pdf.self;
+package org.wangwei.pdf_new.sources.table;
+
+import org.wangwei.pdf.self.LocLayout;
 
 /**
  * Column.java
@@ -9,10 +11,12 @@ public class Column {
 
     private String name;
     private float width;
+    private LocLayout layout;
 
-    public Column(String name, float width) {
+    public Column(String name, float width, LocLayout layout) {
         this.name = name;
         this.width = width;
+        this.layout = layout;
     }
 
     public String getName() {
@@ -31,4 +35,11 @@ public class Column {
         this.width = width;
     }
 
+    public LocLayout getLayout() {
+        return layout;
+    }
+
+    public void setLayout(LocLayout layout) {
+        this.layout = layout;
+    }
 }

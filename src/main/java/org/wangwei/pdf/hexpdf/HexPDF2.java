@@ -282,7 +282,8 @@ public class HexPDF2 extends PDDocument {
 
     //<editor-fold desc="Description">
     /**
-     * Recalculate page boundaries after a change of margins or page style. Automatically called after margin changes.
+     * Recalculate page boundaries after a change of margins or page style.
+     * Automatically called after margin changes.
      *
      * @see #contentHeight
      * @see #contentWidth
@@ -993,6 +994,8 @@ public class HexPDF2 extends PDDocument {
         float x = cursorX;
         float y = cursorY;
 
+
+
         if (table_align == HexPDF2.CENTER || table_align == HexPDF2.RIGHT) {
             x += ((table_align == HexPDF2.CENTER) ? free_space / 2 : free_space);
         }
@@ -1001,25 +1004,25 @@ public class HexPDF2 extends PDDocument {
             if (row != null) {
                 // Can the next row it fit on same page? Find the height of next
                 // row and make a new page after adding this row if necessary.
-                float guessRowHeight = 0;
-                if (rownum < table.length) {
-                    guessRowHeight = rowHeight(x, contentStartY, column_width, table[rownum], column_flag);
-                }
+//                float guessRowHeight = 0;
+//                if (rownum < table.length) {
+//                    guessRowHeight = rowHeight(x, contentStartY, column_width, table[rownum], column_flag);
+//                }
                 rowheight = addRow(x, y - tabheight, column_width, row, column_flag);
                 tabheight += rowheight;
                 // Ne page before next row?
-                if ((y - tabheight - guessRowHeight) < contentEndY) {
-                    newPage();
-                    tabheight = 0;
-                    y = contentStartY;
-                }
+//                if ((y - tabheight - guessRowHeight) < contentEndY) {
+//                    newPage();
+//                    tabheight = 0;
+//                    y = contentStartY;
+//                }
             }
             rownum++;
         }
 
-        // cursorX = contentStartX;
-        cursorX += table_width + 10f;
-        // cursorY -= (rowheight + tableCellMargin);
+         cursorX = contentStartX;
+//        cursorX += table_width + 10f;
+         cursorY -= (rowheight + tableCellMargin);
         ignorePagebleed = oldIgnoreBleed;
         return tabheight;
     }
@@ -1309,7 +1312,7 @@ public class HexPDF2 extends PDDocument {
      * Set footer to use on all pages. The footer is added when finalizing the document.
      * 
      * @param footer Footer to use
-     * @see net.heksemann.hexpdf.Footer
+     * @see
      */
     public void setFooter(Footer footer) {
         this.footer = footer;

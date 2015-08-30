@@ -32,7 +32,7 @@ import org.wangwei.pdf.hexpdf.HexPDF2;
  */
 public class CreateHexPDFdoc2 {
 
-    private void createDocument() throws Exception {
+    private void createDocument4() throws Exception {
 
         Object[][] table = getTable();
 
@@ -44,10 +44,35 @@ public class CreateHexPDFdoc2 {
         // Create the first page
         doc.newPage();
 
-        doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
-        doc.drawTable(table, new float[]{150, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
+        float y = doc.getCursorY();
+        doc.drawTable(table, new float[]{250, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
+        doc.setCursor(doc.getCursorX(), y);
+        doc.drawTable(table, new float[]{250, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.RIGHT);
 
+        y = doc.getCursorY();
+        doc.drawTable(table, new float[]{250, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LEFT);
+        doc.setCursor(doc.getCursorX(), y);
+        doc.drawTable(table, new float[]{250, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.RIGHT);
+
+        // Save the document
+        doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");
+    }
+
+
+    private void createDocument1() throws Exception {
+
+        Object[][] table = getTable();
+
+        // Create a new document and include a default footer
+        HexPDF2 doc = new HexPDF2();
+        doc.setOrientation(HexPDF2.PORTRAIT);
+
+        createFooter(doc);
+
+        // Create the first page
         doc.newPage();
+
+        doc.drawTable(table, new float[]{300, 180}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LANDSCAPE);
 
         // Save the document
         doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");
@@ -107,6 +132,6 @@ public class CreateHexPDFdoc2 {
 
     public static void main(String[] args) throws Exception {
         CreateHexPDFdoc2 hex = new CreateHexPDFdoc2();
-        hex.createDocument();
+        hex.createDocument1();
     }
 }
