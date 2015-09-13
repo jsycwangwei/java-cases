@@ -39,7 +39,7 @@ public class CreateHexPDFdoc2 {
         // Create a new document and include a default footer
         HexPDF2 doc = new HexPDF2();
 
-        createFooter(doc);
+        // createFooter(doc);
 
         // Create the first page
         doc.newPage();
@@ -55,9 +55,8 @@ public class CreateHexPDFdoc2 {
         doc.drawTable(table, new float[]{250, 100}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.RIGHT);
 
         // Save the document
-        doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");
+        doc.finish("d:/4.pdf");
     }
-
 
     private void createDocument1() throws Exception {
 
@@ -72,16 +71,18 @@ public class CreateHexPDFdoc2 {
         // Create the first page
         doc.newPage();
 
-        doc.drawTable(table, new float[]{300, 180}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LANDSCAPE);
+        doc.drawText("中文");
+
+        doc.drawTable(table, new float[]{100, 187}, new int[]{HexPDF.CENTER, HexPDF.LEFT}, HexPDF.LANDSCAPE);
 
         // Save the document
-        doc.finish("/Users/jsycwangwei/myHexPDFfile.pdf");
+        doc.finish("d:/1.pdf");
     }
 
     private void createFooter(HexPDF2 doc) {
         doc.setFooter(Footer.defaultFooter);
         // Change center text in footer
-        doc.getFooter().setCenterText("A simple PDF document\nWritten by me");
+        doc.getFooter().setCenterText("尾巴A simple PDF document\nWritten by me");
         // Use footer also on first page
         doc.getFooter().setOMIT_FIRSTPAGE(false);
     }
@@ -110,9 +111,10 @@ public class CreateHexPDFdoc2 {
     }
 
     private String getText(int num) {
-        String[] txt = {
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Multa sunt dicta ab antiquis de contemnendis ac despiciendis rebus humanis; Duo Reges: constructio interrete. Id Sextilius factum negabat. Tum Quintus: Est plane, Piso, ut dicis, inquit.\n\n",
-                "Quasi vero, inquit, perpetua oratio rhetorum solum, non etiam philosophorum sit. Septem autem illi non suo, sed populorum suffragio omnium nominati sunt. Cur post Tarentum ad Archytam? Quia nec honesto quic quam honestius nec turpi turpius. Re mihi non aeque satisfacit, et quidem locis pluribus. Unum nescio, quo modo possit, si luxuriosus sit, finitas cupiditates habere. Ad quorum et cognitionem et usum iam corroborati natura ipsa praeeunte deducimur.\n\n"};
+        String[] txt =
+                {
+                        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Multa sunt dicta ab antiquis de contemnendis ac despiciendis rebus humanis; Duo Reges: constructio interrete. Id Sextilius factum negabat. Tum Quintus: Est plane, Piso, ut dicis, inquit.\n\n",
+                        "Quasi vero, inquit, perpetua oratio rhetorum solum, non etiam philosophorum sit. Septem autem illi non suo, sed populorum suffragio omnium nominati sunt. Cur post Tarentum ad Archytam? Quia nec honesto quic quam honestius nec turpi turpius. Re mihi non aeque satisfacit, et quidem locis pluribus. Unum nescio, quo modo possit, si luxuriosus sit, finitas cupiditates habere. Ad quorum et cognitionem et usum iam corroborati natura ipsa praeeunte deducimur.\n\n"};
 
         String ret = "";
         for (int i = 0; i < num && i < txt.length; i++) {
@@ -122,10 +124,11 @@ public class CreateHexPDFdoc2 {
     }
 
     private Object[][] getTable() throws Exception {
-        String base = "/Users/jsycwangwei/Downloads/1.jpg";
+        String base = "d:/1.jpg";
 
-        Object[][] tab = {{"pic", "Country"}, {getImage(base, 150, 40), "Norway"}, {getImage(base, 150, 40), "Sweden"},
-                {getImage(base, 150, 40), "Denmark"}, {getImage(base, 150, 40), "Vietnam"}};
+        Object[][] tab =
+                {{"pic", "Country"}, {getImage(base, 150, 40), "Norway"}, {getImage(base, 150, 40), "Sweden"},
+                        {getImage(base, 150, 40), "Denmark"}, {getImage(base, 150, 40), "Vietnam"}};
 
         return tab;
     }

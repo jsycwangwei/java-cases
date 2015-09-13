@@ -3,8 +3,9 @@ package org.wangwei.proxy;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
-public class DoProxy implements InvocationHandler {
+import org.wangwei.Anno.Case;
 
+public class DoProxy implements InvocationHandler {
     private Object obj;
 
     public DoProxy(Object obj) {
@@ -14,10 +15,14 @@ public class DoProxy implements InvocationHandler {
 
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         Object result = null;
-        doBefore();
-        result = method.invoke(obj, args);
-        doAfter();
-
+        if (method.getAnnotation(Case.class) != null) {
+            doBefore();
+            result = method.invoke(obj, args);
+            doAfter();
+        }
+        else {
+            result = method.invoke(obj, args);
+        }
         return result;
     }
 

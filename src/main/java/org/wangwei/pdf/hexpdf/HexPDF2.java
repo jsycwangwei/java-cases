@@ -270,9 +270,10 @@ public class HexPDF2 extends PDDocument {
         leftMargin = 50f;
         bottomMargin = 50f;
         topMargin = 50f;
-        fontSize = 10;
-        font = PDType1Font.HELVETICA;
-        pageSize = PDPage.PAGE_SIZE_A4;
+        fontSize = 8;
+        font = PDType1Font.COURIER;
+        pageSize = new PDRectangle(288, 288);
+        // pageSize = PDPage.PAGE_SIZE_A4;
         normalColor = Color.black;
         titleColor = Color.BLUE;
         // orientation = HexPDF2.PORTRAIT; //垂直
@@ -280,10 +281,9 @@ public class HexPDF2 extends PDDocument {
         // firstPage();
     }
 
-    //<editor-fold desc="Description">
+    // <editor-fold desc="Description">
     /**
-     * Recalculate page boundaries after a change of margins or page style.
-     * Automatically called after margin changes.
+     * Recalculate page boundaries after a change of margins or page style. Automatically called after margin changes.
      *
      * @see #contentHeight
      * @see #contentWidth
@@ -313,7 +313,8 @@ public class HexPDF2 extends PDDocument {
         // Set line separation according to current font-size
         lineSep = font.getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * fontSize;
     }
-    //</editor-fold>
+
+    // </editor-fold>
 
     /**
      * Returns the width of the pdf representation of the given string in points.
@@ -463,9 +464,11 @@ public class HexPDF2 extends PDDocument {
      */
     public void finish(String filename) {
         try {
-            setTextColor(footer.getTextColor());
-            setFont(footer.getFont());
-            setFontSize(footer.getFontsize());
+            if (null != footer) {
+                setTextColor(footer.getTextColor());
+                setFont(footer.getFont());
+                setFontSize(footer.getFontsize());
+            }
 
             closePage();
             drawFooters();
@@ -761,8 +764,8 @@ public class HexPDF2 extends PDDocument {
                         if (newline_after == false) {
                             // Only justify if this is the not last line of the paragraph.
                             try {
-                                cs.appendRawCommands(
-                                        String.format("%f Tc\n", space / (toDraw.length() - 1)).replace(',', '.'));
+                                cs.appendRawCommands(String.format("%f Tc\n", space / (toDraw.length() - 1)).replace(
+                                        ',', '.'));
                                 doDrawText(toDraw);
                                 toDraw = null;
                                 cs.appendRawCommands("0 Tc\n");
@@ -994,8 +997,6 @@ public class HexPDF2 extends PDDocument {
         float x = cursorX;
         float y = cursorY;
 
-
-
         if (table_align == HexPDF2.CENTER || table_align == HexPDF2.RIGHT) {
             x += ((table_align == HexPDF2.CENTER) ? free_space / 2 : free_space);
         }
@@ -1004,25 +1005,25 @@ public class HexPDF2 extends PDDocument {
             if (row != null) {
                 // Can the next row it fit on same page? Find the height of next
                 // row and make a new page after adding this row if necessary.
-//                float guessRowHeight = 0;
-//                if (rownum < table.length) {
-//                    guessRowHeight = rowHeight(x, contentStartY, column_width, table[rownum], column_flag);
-//                }
+                float guessRowHeight = 0;
+                if (rownum < table.length) {
+                    guessRowHeight = rowHeight(x, contentStartY, column_width, table[rownum], column_flag);
+                }
                 rowheight = addRow(x, y - tabheight, column_width, row, column_flag);
                 tabheight += rowheight;
                 // Ne page before next row?
-//                if ((y - tabheight - guessRowHeight) < contentEndY) {
-//                    newPage();
-//                    tabheight = 0;
-//                    y = contentStartY;
-//                }
+                if ((y - tabheight - guessRowHeight) < contentEndY) {
+                    newPage();
+                    tabheight = 0;
+                    y = contentStartY;
+                }
             }
             rownum++;
         }
 
-         cursorX = contentStartX;
-//        cursorX += table_width + 10f;
-         cursorY -= (rowheight + tableCellMargin);
+        cursorX = contentStartX;
+        // cursorX += table_width + 10f;
+        cursorY -= (rowheight + tableCellMargin);
         ignorePagebleed = oldIgnoreBleed;
         return tabheight;
     }

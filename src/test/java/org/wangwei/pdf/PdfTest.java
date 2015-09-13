@@ -45,6 +45,6 @@ public class PdfTest {
 
         AddImageToPDF imagePdf = new AddImageToPDF();
 
-        imagePdf.createPDFFromImage(savePath, "c:/1.jpg", savePath);
+        imagePdf.createPDFFromImage(savePath, "d:/1.jpg", savePath);
     }
 }

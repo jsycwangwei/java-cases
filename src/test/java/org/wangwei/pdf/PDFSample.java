@@ -40,7 +40,7 @@ public class PDFSample {
     private static final float CELL_MARGIN = 20;
 
     @Test
-    public void calA4(){
+    public void calA4() {
         System.out.println(PAGE_SIZE.getWidth());
     }
 
@@ -65,14 +65,16 @@ public class PDFSample {
         columns.add(new Column("ad", 150));
 
         // Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
-        Object[][] content = {{"text", "hello"}, {"image", getImage("/Users/jsycwangwei/Downloads/1.jpg", 0.2f)}};
+        Object[][] content = {{"中文text", "hello"}, {"image", getImage("d:/1.jpg", 0.2f)}};
 
-//        float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 * MARGIN);
+        // float tableHeight = IS_LANDSCAPE ? PAGE_SIZE.getWidth() - (2 * MARGIN) : PAGE_SIZE.getHeight() - (2 *
+        // MARGIN);
         float tableHeight = 300f;
-        Table table = new TableBuilder().setCellMargin(CELL_MARGIN).setColumns(columns).setContent(content)
-                .setHeight(tableHeight).setNumberOfRows(content.length).setRowHeight(ROW_HEIGHT).setMargin(MARGIN)
-                .setPageSize(PAGE_SIZE).setLandscape(IS_LANDSCAPE).setTextFont(TEXT_FONT).setFontSize(FONT_SIZE)
-                .build();
+        Table table =
+                new TableBuilder().setCellMargin(CELL_MARGIN).setColumns(columns).setContent(content)
+                        .setHeight(tableHeight).setNumberOfRows(content.length).setRowHeight(ROW_HEIGHT)
+                        .setMargin(MARGIN).setPageSize(PAGE_SIZE).setLandscape(IS_LANDSCAPE).setTextFont(TEXT_FONT)
+                        .setFontSize(FONT_SIZE).build();
         return table;
     }
 

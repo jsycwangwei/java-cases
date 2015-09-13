@@ -20,7 +20,7 @@ public class PDFTableGenerator {
         try {
             doc = new PDDocument();
             drawTable(doc, table);
-            doc.save("/Users/jsycwangwei/sample.pdf");
+            doc.save("d:/sample.pdf");
         }
         finally {
             if (doc != null) {
@@ -47,32 +47,35 @@ public class PDFTableGenerator {
     // Draws current page table grid and border lines and content
     private void drawCurrentPage(Table table, Object[][] currentPageContent, PDPageContentStream contentStream)
             throws IOException {
-        float tableTopY = table.isLandscape() ? table.getPageSize().getWidth() - table.getMargin()
-                : table.getPageSize().getHeight() - table.getMargin();
+        float tableTopY =
+                table.isLandscape() ? table.getPageSize().getWidth() - table.getMargin() : table.getPageSize()
+                        .getHeight() - table.getMargin();
 
-        // Draws grid and borders
-        drawTableGrid(table, currentPageContent, contentStream, tableTopY);
+                // Draws grid and borders
+                drawTableGrid(table, currentPageContent, contentStream, tableTopY);
 
-        // Position cursor to start drawing content
-        float nextTextX = table.getMargin() + table.getCellMargin();
-        // Calculate center alignment for text in cell considering font height
-        float nextTextY = tableTopY - (table.getRowHeight() / 2)
-                - ((table.getTextFont().getFontDescriptor().getFontBoundingBox().getHeight() / 1000
-                        * table.getFontSize()) / 4);
+                // Position cursor to start drawing content
+                float nextTextX = table.getMargin() + table.getCellMargin();
+                // Calculate center alignment for text in cell considering font height
+                float nextTextY =
+                        tableTopY
+                        - (table.getRowHeight() / 2)
+                        - ((table.getTextFont().getFontDescriptor().getFontBoundingBox().getHeight() / 1000 * table
+                                .getFontSize()) / 4);
 
-        // Write column headers
-        writeContentLine(table.getColumnsNamesAsArray(), contentStream, nextTextX, nextTextY, table);
-        nextTextY -= table.getRowHeight();
-        nextTextX = table.getMargin() + table.getCellMargin();
+                // Write column headers
+                writeContentLine(table.getColumnsNamesAsArray(), contentStream, nextTextX, nextTextY, table);
+                nextTextY -= table.getRowHeight();
+                nextTextX = table.getMargin() + table.getCellMargin();
 
-        // Write content
-        for (int i = 0; i < currentPageContent.length; i++) {
-            writeContentLine(currentPageContent[i], contentStream, nextTextX, nextTextY, table);
-            nextTextY -= table.getRowHeight();
-            nextTextX = table.getMargin() + table.getCellMargin();
-        }
+                // Write content
+                for (int i = 0; i < currentPageContent.length; i++) {
+                    writeContentLine(currentPageContent[i], contentStream, nextTextX, nextTextY, table);
+                    nextTextY -= table.getRowHeight();
+                    nextTextX = table.getMargin() + table.getCellMargin();
+                }
 
-        contentStream.close();
+                contentStream.close();
     }
 
     // Writes the content for one line
