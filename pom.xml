@@ -66,5 +66,12 @@
 	<version>2.6.0</version>
 </dependency>
 
+<!-- cassandra -->
+    <dependency>
+		<groupId>org.springframework.data</groupId>
+		<artifactId>spring-data-cassandra</artifactId>
+		<version>1.2.0.RELEASE</version>
+	</dependency>
+
     </dependencies>
 </project>
