@@ -1,14 +1,14 @@
 package org.wangwei.nosql.cassandra;
 
-import java.util.ArrayList;
-import java.util.Date;
+import java.net.UnknownHostException;
 import java.util.List;
 
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.data.cassandra.core.CassandraOperations;
 
 public class Demo {
-     public static void main(String[] args) throws UnknownHostException {
+    public static void main(String[] args) throws UnknownHostException {
         ConfigurableApplicationContext ct = new ClassPathXmlApplicationContext("beans.xml");
         CassandraOperations cassandraOperations = ct.getBean("cqlTemplate", CassandraOperations.class);
         // PersonRepository repository = ct.getBean(PersonRepository.class);
