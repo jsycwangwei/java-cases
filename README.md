@@ -1,2 +1,2 @@
 # java-cases
-Some simple cases for java web.
+Some simple cases for java.
