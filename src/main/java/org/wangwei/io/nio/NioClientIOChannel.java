@@ -135,6 +135,7 @@ public class NioClientIOChannel implements ISeckillClientIOChannel {
 
     private void parseResponse(ByteBuffer receivebuffer, SelectionKey selectionKey, SocketChannel client, int count)
             throws ClosedChannelException {
+
         if (count == SecKillResponse.LENGTH_RESPONSE) {
             byte[] readBytes = new byte[count];
             receivebuffer.get(readBytes);
